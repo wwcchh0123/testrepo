@@ -22,10 +22,10 @@ func printFunc2() {
 }
 
 func test3() {
-                	//testerr 33333
+	//testerr 33333
 
-		// 222222222
-	   //testerr 33333
+	// 222222222
+	//testerr 33333
 
 	// rrrrrrrrr
 }
