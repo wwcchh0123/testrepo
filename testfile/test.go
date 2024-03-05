@@ -3,10 +3,10 @@ package test
 import "fmt"
 
 func test2() {
-                	//testerr 33333
+	//testerr 33333
 
 	// 222222222
-	   //testerr 33333
+	//testerr 33333
 
 	// rrrrrrrrr
 }
