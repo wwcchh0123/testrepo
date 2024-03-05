@@ -17,8 +17,8 @@ func printFunc1() {
 
 func printFunc2() {
 	fmt.Println("this is a test function 2")
-               	// wrong fomat
-                // wrong fomat
+	// wrong fomat
+	// wrong fomat
 }
 
 func test3() {
