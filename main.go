@@ -1,9 +1,7 @@
 package main
 
-
-
-func main(){
+func main() {
 	// this is a  mian format err
-		//test
-		//test
+	//test
+	//test
 }
