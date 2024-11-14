@@ -1,4 +1,4 @@
-            - name: Run trivy with reviewdog
+- name: Run trivy with reviewdog
   # You may pin to the exact commit or the version.
   # uses: reviewdog/action-trivy@53df306f280cda70854ce997d97759e53c0e3abe
   uses: reviewdog/action-trivy@v1.9.0
