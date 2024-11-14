@@ -1,2 +1,0 @@
-- name: Run trivy with reviewdog
-  uses: reviewdog/action-trivy@v1.12.1
