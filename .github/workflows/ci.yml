@@ -12,7 +12,7 @@ jobs:
       - name: Run trivy with reviewdog output on the PR
         uses: reviewdog/action-trivy@v1
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
           trivy_command: config # Change trivy command
           trivy_target: . # Change trivy target directory
           working_directory: . # Change working directory
