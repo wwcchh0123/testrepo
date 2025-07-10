@@ -20,10 +20,11 @@ const (
 )
 
 type Game struct {
-	snake    *Snake
-	food     *Food
-	score    int
-	gameOver bool
+	snake         *Snake
+	food          *Food
+	score         int
+	gameOver      bool
+	updateCounter int
 }
 
 type Snake struct {
@@ -53,7 +54,7 @@ func NewSnake() *Snake {
 	s := &Snake{
 		body:      list.New(),
 		direction: Point{X: 1, Y: 0},
-		speed:     5,
+		speed:     30,
 	}
 	s.body.PushFront(Point{X: 5, Y: 5})
 	return s
@@ -85,6 +86,12 @@ func (g *Game) Update() error {
 	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) && g.snake.direction.X == 0 {
 		g.snake.direction = Point{X: 1, Y: 0}
 	}
+
+	g.updateCounter++
+	if g.updateCounter < g.snake.speed {
+		return nil
+	}
+	g.updateCounter = 0
 
 	head := g.snake.body.Front().Value.(Point)
 	newHead := Point{
@@ -139,6 +146,7 @@ func (g *Game) Reset() {
 	g.food = NewFood()
 	g.score = 0
 	g.gameOver = false
+	g.updateCounter = 0
 }
 
 func main() {
