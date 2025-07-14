@@ -1,17 +1,45 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"time"
+
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+)
+
+const (
+	ScreenWidth  = 640
+	ScreenHeight = 480
+)
+
+type Game struct {
+	currentTime string
+}
+
+func NewGame() *Game {
+	return &Game{}
+}
+
+func (g *Game) Update() error {
+	t := time.Now()
+	g.currentTime = t.Format("2006-01-02 15:04:05")
+	return nil
+}
+
+func (g *Game) Draw(screen *ebiten.Image) {
+	ebitenutil.DebugPrint(screen, g.currentTime)
+}
+
+func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
+	return ScreenWidth, ScreenHeight
+}
 
 func main() {
-	for y := 1.5; y > -1.5; y -= 0.1 {
-		for x := -1.5; x < 1.5; x += 0.05 {
-			a := x*x + y*y - 1
-			if a*a*a-x*x*y*y*y <= 0 {
-				fmt.Print("*")
-			} else {
-				fmt.Print(" ")
-			}
-		}
-		fmt.Println()
+	game := NewGame()
+	ebiten.SetWindowSize(ScreenWidth, ScreenHeight)
+	ebiten.SetWindowTitle("Clock")
+	if err := ebiten.RunGame(game); err != nil {
+		log.Fatal(err)
 	}
 }
