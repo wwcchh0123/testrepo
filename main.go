@@ -33,7 +33,7 @@ var (
 
 func init() {
 	// Decode images
-	img, _, err := image.Decode(bytes.NewReader(Player_png))
+	img, _, err := image.Decode(bytes.NewReader(Enemy_png))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -45,7 +45,7 @@ func init() {
 	}
 	bulletImage = ebiten.NewImageFromImage(img)
 
-	img, _, err = image.Decode(bytes.NewReader(Enemy_png))
+	img, _, err = image.Decode(bytes.NewReader(Player_png))
 	if err != nil {
 		log.Fatal(err)
 	}
