@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"image"
 	"image/color"
 	_ "image/png"
@@ -10,15 +11,18 @@ import (
 	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/examples/resources/images"
+	
+	"github.com/hajimehoshi/ebiten/v2/text"
+	"golang.org/x/image/font/basicfont"
 )
 
 const (
-	screenWidth  = 640
-	screenHeight = 480
-	playerSpeed  = 5
-	bulletSpeed  = 8
-	enemySpeed   = 2
+	screenWidth   = 640
+	screenHeight  = 480
+	playerSpeed   = 5
+	bulletSpeed   = 8
+	enemySpeed    = 2
+	shootCooldown = 15 // Cooldown in frames (1/4 second at 60fps)
 )
 
 var (
@@ -29,19 +33,19 @@ var (
 
 func init() {
 	// Decode images
-	img, _, err := image.Decode(bytes.NewReader(images.Player_png))
+	img, _, err := image.Decode(bytes.NewReader(Player_png))
 	if err != nil {
 		log.Fatal(err)
 	}
 	playerImage = ebiten.NewImageFromImage(img)
 
-	img, _, err = image.Decode(bytes.NewReader(images.Bullet_png))
+	img, _, err = image.Decode(bytes.NewReader(Bullet_png))
 	if err != nil {
 		log.Fatal(err)
 	}
 	bulletImage = ebiten.NewImageFromImage(img)
 
-	img, _, err = image.Decode(bytes.NewReader(images.Enemy_png))
+	img, _, err = image.Decode(bytes.NewReader(Enemy_png))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -53,9 +57,19 @@ type Player struct {
 	image *ebiten.Image
 }
 
+func (p *Player) GetRect() image.Rectangle {
+	bounds := p.image.Bounds()
+	return image.Rect(int(p.x), int(p.y), int(p.x)+bounds.Dx(), int(p.y)+bounds.Dy())
+}
+
 type Bullet struct {
 	x, y  float64
 	image *ebiten.Image
+}
+
+func (b *Bullet) GetRect() image.Rectangle {
+	bounds := b.image.Bounds()
+	return image.Rect(int(b.x), int(b.y), int(b.x)+bounds.Dx(), int(b.y)+bounds.Dy())
 }
 
 type Enemy struct {
@@ -63,11 +77,19 @@ type Enemy struct {
 	image *ebiten.Image
 }
 
+func (e *Enemy) GetRect() image.Rectangle {
+	bounds := e.image.Bounds()
+	return image.Rect(int(e.x), int(e.y), int(e.x)+bounds.Dx(), int(e.y)+bounds.Dy())
+}
+
 type Game struct {
-	player        *Player
-	bullets       []*Bullet
-	enemies       []*Enemy
+	player          *Player
+	bullets         []*Bullet
+	enemies         []*Enemy
 	enemySpawnTimer int
+	shootTimer      int
+	score           int
+	gameOver        bool
 }
 
 func NewGame() *Game {
@@ -82,6 +104,14 @@ func NewGame() *Game {
 }
 
 func (g *Game) Update() error {
+	if g.gameOver {
+		if ebiten.IsKeyPressed(ebiten.KeyR) {
+			// Reset the game by creating a new one
+			*g = *NewGame()
+		}
+		return nil
+	}
+
 	// Player movement
 	if ebiten.IsKeyPressed(ebiten.KeyLeft) {
 		g.player.x -= playerSpeed
@@ -96,10 +126,24 @@ func (g *Game) Update() error {
 		g.player.y += playerSpeed
 	}
 
+	// Keep player on screen
+	if g.player.x < 0 {
+		g.player.x = 0
+	}
+	if g.player.x > screenWidth-float64(g.player.image.Bounds().Dx()) {
+		g.player.x = screenWidth - float64(g.player.image.Bounds().Dx())
+	}
+
+	// Decrement shoot timer
+	if g.shootTimer > 0 {
+		g.shootTimer--
+	}
+
 	// Player shooting
-	if ebiten.IsKeyPressed(ebiten.KeySpace) {
+	if ebiten.IsKeyPressed(ebiten.KeySpace) && g.shootTimer == 0 {
+		g.shootTimer = shootCooldown
 		bullet := &Bullet{
-			x:     g.player.x,
+			x:     g.player.x + float64(g.player.image.Bounds().Dx())/2 - float64(bulletImage.Bounds().Dx())/2,
 			y:     g.player.y,
 			image: bulletImage,
 		}
@@ -139,12 +183,21 @@ func (g *Game) Update() error {
 	// Collision detection
 	for i := len(g.enemies) - 1; i >= 0; i-- {
 		enemy := g.enemies[i]
+		enemyRect := enemy.GetRect()
+
+		// Check collision with player
+		if enemyRect.Overlaps(g.player.GetRect()) {
+			g.gameOver = true
+			return nil // Stop updates for this frame
+		}
+
+		// Check collision with bullets
 		for j := len(g.bullets) - 1; j >= 0; j-- {
 			bullet := g.bullets[j]
-			if bullet.x > enemy.x && bullet.x < enemy.x+float64(enemy.image.Bounds().Dx()) &&
-				bullet.y > enemy.y && bullet.y < enemy.y+float64(enemy.image.Bounds().Dy()) {
+			if bullet.GetRect().Overlaps(enemyRect) {
 				g.enemies = append(g.enemies[:i], g.enemies[i+1:]...)
 				g.bullets = append(g.bullets[:j], g.bullets[j+1:]...)
+				g.score++
 				break
 			}
 		}
@@ -173,6 +226,20 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		op := &ebiten.DrawImageOptions{}
 		op.GeoM.Translate(enemy.x, enemy.y)
 		screen.DrawImage(enemy.image, op)
+	}
+
+	// Draw score
+	scoreStr := fmt.Sprintf("Score: %d", g.score)
+	text.Draw(screen, scoreStr, basicfont.Face7x13, 10, 20, color.White)
+
+	// Draw Game Over message
+	if g.gameOver {
+		msg := "GAME OVER"
+		subMsg := "Press 'R' to Restart"
+		msgX := (screenWidth - len(msg)*7) / 2
+		subMsgX := (screenWidth - len(subMsg)*7) / 2
+		text.Draw(screen, msg, basicfont.Face7x13, msgX, screenHeight/2-20, color.White)
+		text.Draw(screen, subMsg, basicfont.Face7x13, subMsgX, screenHeight/2, color.White)
 	}
 }
 
