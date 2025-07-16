@@ -2,6 +2,7 @@ package main
 
 import (
 	"image/color"
+	"log"
 	"math/rand"
 	"time"
 
@@ -11,10 +12,10 @@ import (
 
 const (
 	TetrisScreenWidth  = 300
-	TetrisScreenHeight = 600
+	TetrisScreenHeight = 400
 	BlockSize          = 30
 	BoardWidth         = 10
-	BoardHeight        = 20
+	BoardHeight        = 30
 )
 
 var (
@@ -82,6 +83,7 @@ type TetrisGame struct {
 }
 
 func NewTetrisGame() *TetrisGame {
+	log.Println("Initializing new game")
 	board := make([][]color.Color, BoardHeight)
 	for i := range board {
 		board[i] = make([]color.Color, BoardWidth)
