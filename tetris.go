@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	TetrisScreenWidth  = 300
+	TetrisScreenWidth  = 400
 	TetrisScreenHeight = 400
 	BlockSize          = 30
 	BoardWidth         = 10
@@ -83,7 +83,7 @@ type TetrisGame struct {
 }
 
 func NewTetrisGame() *TetrisGame {
-	log.Println("Initializing new game")
+	log.Println("Initializing Tetris game")
 	board := make([][]color.Color, BoardHeight)
 	for i := range board {
 		board[i] = make([]color.Color, BoardWidth)
