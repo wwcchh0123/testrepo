@@ -14,6 +14,9 @@ jobs:
   claude-response:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 20 
     - uses: anthropics/claude-code-action@beta
       with:
         anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
