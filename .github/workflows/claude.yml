@@ -28,7 +28,7 @@ jobs:
           anthropic_api_key: ${{secrets.ANTHROPIC_API_KEY}}
           claude_env: |
             DEBUG: true
-            ANTHROPIC_BASE_URL: https://cc.qiniu.com
+            ANTHROPIC_BASE_URL: https://cc.qiniu.com/api/
 
 
 
