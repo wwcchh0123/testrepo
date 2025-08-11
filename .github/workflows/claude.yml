@@ -25,10 +25,10 @@ jobs:
         uses: anthropics/claude-code-action@v0.0.31
         with:
           github_token: ${{ secrets.MY_GITHUB_TOKEN }}
-          anthropic_api_key: sk-SoiGxVC65NvFpmVEZr7n9ebs5BEXUEbPbzVJtbMsbHcvyqYE
+          anthropic_api_key: ${{secrets.ANTHROPIC_API_KEY}}
           claude_env: |
             DEBUG: true
-            ANTHROPIC_BASE_URL: https://sg.instcopilot-api.com
+            ANTHROPIC_BASE_URL: https://cc.qiniu.com
 
 
 
