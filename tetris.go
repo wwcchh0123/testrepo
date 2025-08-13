@@ -10,11 +10,11 @@ import (
 
 const (
 	boardWidth       = 10
-	boardHeight      = 20
+	boardHeight      = 30
 	blockSize        = 30
 	boardPixelWidth  = boardWidth * blockSize
 	boardPixelHeight = boardHeight * blockSize
-	fallSpeed        = 15 // Lower is faster
+	fallSpeed        = 20 // Lower is faster
 )
 
 var (
