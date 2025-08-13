@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	boardWidth       = 10
+	boardWidth       = 30
 	boardHeight      = 30
 	blockSize        = 30
 	boardPixelWidth  = boardWidth * blockSize
