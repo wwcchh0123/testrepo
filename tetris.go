@@ -14,7 +14,7 @@ const (
 	blockSize        = 30
 	boardPixelWidth  = boardWidth * blockSize
 	boardPixelHeight = boardHeight * blockSize
-	fallSpeed        = 20 // Lower is faster
+	fallSpeed        = 30 // Lower is faster
 )
 
 var (
