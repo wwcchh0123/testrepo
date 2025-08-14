@@ -14,7 +14,7 @@ import (
 const (
 	screenWidth  = 1000
 	screenHeight = 960
-	gravity      = 0.1
+	gravity      = 0.2
 )
 
 // Particle represents a single particle in a firework explosion.
