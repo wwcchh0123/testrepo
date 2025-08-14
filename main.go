@@ -13,7 +13,7 @@ import (
 
 const (
 	screenWidth  = 1000
-	screenHeight = 960
+	screenHeight = 1200
 	gravity      = 0.2
 )
 
