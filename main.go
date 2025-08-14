@@ -1,258 +1,145 @@
 package main
 
 import (
-	"bytes"
-	"fmt"
-	"image"
 	"image/color"
-	_ "image/png"
 	"log"
+	"math"
 	"math/rand"
 	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	
-	"github.com/hajimehoshi/ebiten/v2/text"
-	"golang.org/x/image/font/basicfont"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 const (
-	screenWidth   = 640
-	screenHeight  = 480
-	playerSpeed   = 5
-	bulletSpeed   = 8
-	enemySpeed    = 2
-	shootCooldown = 15 // Cooldown in frames (1/4 second at 60fps)
+	screenWidth  = 640
+	screenHeight = 480
+	gravity      = 0.1
 )
 
-var (
-	playerImage *ebiten.Image
-	bulletImage *ebiten.Image
-	enemyImage  *ebiten.Image
-)
-
-func init() {
-	// Decode images
-	img, _, err := image.Decode(bytes.NewReader(Enemy_png))
-	if err != nil {
-		log.Fatal(err)
-	}
-	playerImage = ebiten.NewImageFromImage(img)
-
-	img, _, err = image.Decode(bytes.NewReader(Bullet_png))
-	if err != nil {
-		log.Fatal(err)
-	}
-	bulletImage = ebiten.NewImageFromImage(img)
-
-	img, _, err = image.Decode(bytes.NewReader(Player_png))
-	if err != nil {
-		log.Fatal(err)
-	}
-	enemyImage = ebiten.NewImageFromImage(img)
+// Particle represents a single particle in a firework explosion.
+type Particle struct {
+	x, y   float64
+	vx, vy float64
+	color  color.Color
+	life   int
 }
 
-type Player struct {
-	x, y  float64
-	image *ebiten.Image
+// Firework represents a single firework, from launch to explosion.
+type Firework struct {
+	x, y      float64
+	vx, vy    float64
+	exploded  bool
+	particles []*Particle
+	color     color.Color
 }
 
-func (p *Player) GetRect() image.Rectangle {
-	bounds := p.image.Bounds()
-	return image.Rect(int(p.x), int(p.y), int(p.x)+bounds.Dx(), int(p.y)+bounds.Dy())
-}
-
-type Bullet struct {
-	x, y  float64
-	image *ebiten.Image
-}
-
-func (b *Bullet) GetRect() image.Rectangle {
-	bounds := b.image.Bounds()
-	return image.Rect(int(b.x), int(b.y), int(b.x)+bounds.Dx(), int(b.y)+bounds.Dy())
-}
-
-type Enemy struct {
-	x, y  float64
-	image *ebiten.Image
-}
-
-func (e *Enemy) GetRect() image.Rectangle {
-	bounds := e.image.Bounds()
-	return image.Rect(int(e.x), int(e.y), int(e.x)+bounds.Dx(), int(e.y)+bounds.Dy())
-}
-
-type Game struct {
-	player          *Player
-	bullets         []*Bullet
-	enemies         []*Enemy
-	enemySpawnTimer int
-	shootTimer      int
-	score           int
-	gameOver        bool
-}
-
-func NewGame() *Game {
-	player := &Player{
-		x:     screenWidth / 2,
-		y:     screenHeight - 50,
-		image: playerImage,
-	}
-	return &Game{
-		player: player,
+// NewFirework creates a new firework that will launch from the bottom of the screen.
+func NewFirework(targetX float64) *Firework {
+	return &Firework{
+		x:        targetX,
+		y:        screenHeight,
+		vx:       (rand.Float64() - 0.5) * 2,
+		vy:       -8 - rand.Float64()*4,
+		exploded: false,
+		color:    color.RGBA{R: uint8(rand.Intn(256)), G: uint8(rand.Intn(256)), B: uint8(rand.Intn(256)), A: 0xff},
 	}
 }
 
-func (g *Game) Update() error {
-	if g.gameOver {
-		if ebiten.IsKeyPressed(ebiten.KeyR) {
-			// Reset the game by creating a new one
-			*g = *NewGame()
+// Update updates the firework's state.
+func (f *Firework) Update() {
+	if !f.exploded {
+		f.x += f.vx
+		f.y += f.vy
+		f.vy += gravity
+
+		if f.vy >= 0 {
+			f.exploded = true
+			for i := 0; i < 100; i++ {
+				angle := rand.Float64() * 2 * math.Pi
+				speed := rand.Float64() * 4
+				f.particles = append(f.particles, &Particle{
+					x:    f.x,
+					y:    f.y,
+					vx:   math.Cos(angle) * speed,
+					vy:   math.Sin(angle) * speed,
+					life: 100,
+				})
+			}
 		}
-		return nil
-	}
-
-	// Player movement
-	if ebiten.IsKeyPressed(ebiten.KeyLeft) {
-		g.player.x -= playerSpeed
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyRight) {
-		g.player.x += playerSpeed
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyUp) {
-		g.player.y -= playerSpeed
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyDown) {
-		g.player.y += playerSpeed
-	}
-
-	// Keep player on screen
-	if g.player.x < 0 {
-		g.player.x = 0
-	}
-	if g.player.x > screenWidth-float64(g.player.image.Bounds().Dx()) {
-		g.player.x = screenWidth - float64(g.player.image.Bounds().Dx())
-	}
-
-	// Decrement shoot timer
-	if g.shootTimer > 0 {
-		g.shootTimer--
-	}
-
-	// Player shooting
-	if ebiten.IsKeyPressed(ebiten.KeySpace) && g.shootTimer == 0 {
-		g.shootTimer = shootCooldown
-		bullet := &Bullet{
-			x:     g.player.x + float64(g.player.image.Bounds().Dx())/2 - float64(bulletImage.Bounds().Dx())/2,
-			y:     g.player.y,
-			image: bulletImage,
-		}
-		g.bullets = append(g.bullets, bullet)
-	}
-
-	// Update bullets
-	for i := len(g.bullets) - 1; i >= 0; i-- {
-		bullet := g.bullets[i]
-		bullet.y -= bulletSpeed
-		if bullet.y < 0 {
-			g.bullets = append(g.bullets[:i], g.bullets[i+1:]...)
-		}
-	}
-
-	// Spawn enemies
-	g.enemySpawnTimer++
-	if g.enemySpawnTimer > 120 {
-		g.enemySpawnTimer = 0
-		enemy := &Enemy{
-			x:     rand.Float64() * screenWidth,
-			y:     0,
-			image: enemyImage,
-		}
-		g.enemies = append(g.enemies, enemy)
-	}
-
-	// Update enemies
-	for i := len(g.enemies) - 1; i >= 0; i-- {
-		enemy := g.enemies[i]
-		enemy.y += enemySpeed
-		if enemy.y > screenHeight {
-			g.enemies = append(g.enemies[:i], g.enemies[i+1:]...)
-		}
-	}
-
-	// Collision detection
-	for i := len(g.enemies) - 1; i >= 0; i-- {
-		enemy := g.enemies[i]
-		enemyRect := enemy.GetRect()
-
-		// Check collision with player
-		if enemyRect.Overlaps(g.player.GetRect()) {
-			g.gameOver = true
-			return nil // Stop updates for this frame
-		}
-
-		// Check collision with bullets
-		for j := len(g.bullets) - 1; j >= 0; j-- {
-			bullet := g.bullets[j]
-			if bullet.GetRect().Overlaps(enemyRect) {
-				g.enemies = append(g.enemies[:i], g.enemies[i+1:]...)
-				g.bullets = append(g.bullets[:j], g.bullets[j+1:]...)
-				g.score++
-				break
+	} else {
+		for i := len(f.particles) - 1; i >= 0; i-- {
+			p := f.particles[i]
+			p.x += p.vx
+			p.y += p.vy
+			p.vy += gravity
+			p.life--
+			if p.life <= 0 {
+				f.particles = append(f.particles[:i], f.particles[i+1:]...)
 			}
 		}
 	}
+}
 
+// Draw draws the firework.
+func (f *Firework) Draw(screen *ebiten.Image) {
+	if !f.exploded {
+		screen.Set(int(f.x), int(f.y), f.color)
+	} else {
+		for _, p := range f.particles {
+			alpha := uint8(float64(p.life) / 100 * 255)
+			r, g, b, _ := f.color.RGBA()
+			c := color.RGBA{R: uint8(r), G: uint8(g), B: uint8(b), A: alpha}
+			screen.Set(int(p.x), int(p.y), c)
+		}
+	}
+}
+
+// Game holds the state of the firework simulation.
+type Game struct {
+	fireworks []*Firework
+}
+
+// NewGame creates a new game instance.
+func NewGame() *Game {
+	return &Game{}
+}
+
+// Update updates the game state.
+func (g *Game) Update() error {
+	if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
+		x, _ := ebiten.CursorPosition()
+		g.fireworks = append(g.fireworks, NewFirework(float64(x)))
+	}
+
+	for i := len(g.fireworks) - 1; i >= 0; i-- {
+		f := g.fireworks[i]
+		f.Update()
+		if f.exploded && len(f.particles) == 0 {
+			g.fireworks = append(g.fireworks[:i], g.fireworks[i+1:]...)
+		}
+	}
 	return nil
 }
 
+// Draw draws the game screen.
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(color.RGBA{0x80, 0xa0, 0xc0, 0xff})
-
-	// Draw player
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(g.player.x, g.player.y)
-	screen.DrawImage(g.player.image, op)
-
-	// Draw bullets
-	for _, bullet := range g.bullets {
-		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Translate(bullet.x, bullet.y)
-		screen.DrawImage(bullet.image, op)
-	}
-
-	// Draw enemies
-	for _, enemy := range g.enemies {
-		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Translate(enemy.x, enemy.y)
-		screen.DrawImage(enemy.image, op)
-	}
-
-	// Draw score
-	scoreStr := fmt.Sprintf("Score: %d", g.score)
-	text.Draw(screen, scoreStr, basicfont.Face7x13, 10, 20, color.White)
-
-	// Draw Game Over message
-	if g.gameOver {
-		msg := "GAME OVER"
-		subMsg := "Press 'R' to Restart"
-		msgX := (screenWidth - len(msg)*7) / 2
-		subMsgX := (screenWidth - len(subMsg)*7) / 2
-		text.Draw(screen, msg, basicfont.Face7x13, msgX, screenHeight/2-20, color.White)
-		text.Draw(screen, subMsg, basicfont.Face7x13, subMsgX, screenHeight/2, color.White)
+	screen.Fill(color.RGBA{0x00, 0x00, 0x00, 0xff}) // Black background
+	for _, f := range g.fireworks {
+		f.Draw(screen)
 	}
 }
 
+// Layout returns the screen size.
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return screenWidth, screenHeight
 }
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	game := NewGame()
 	ebiten.SetWindowSize(screenWidth, screenHeight)
-	ebiten.SetWindowTitle("Plane Game")
-	if err := ebiten.RunGame(game); err != nil {
+	ebiten.SetWindowTitle("Fireworks")
+	if err := ebiten.RunGame(NewGame()); err != nil {
 		log.Fatal(err)
 	}
 }
