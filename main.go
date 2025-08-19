@@ -7,239 +7,269 @@ import (
 	"image/color"
 	_ "image/png"
 	"log"
+	"math"
 	"math/rand"
 	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text"
 	"golang.org/x/image/font/basicfont"
 )
 
 const (
-	screenWidth   = 640
-	screenHeight  = 480
-	playerSpeed   = 5
-	bulletSpeed   = 8
-	enemySpeed    = 2
-	shootCooldown = 15 // Cooldown in frames (1/4 second at 60fps)
+	screenWidth      = 480
+	screenHeight     = 640
+	platformWidth    = 100
+	platformHeight   = 20
+	playerWidth      = 32
+	playerHeight     = 32
+	gravity          = 0.4
+	chargeRate       = 0.1
+	maxCharge        = 15.0
+	jumpPowerMultiplier = -1.2
 )
 
 var (
-	playerImage *ebiten.Image
-	bulletImage *ebiten.Image
-	enemyImage  *ebiten.Image
+	playerImage     *ebiten.Image
+	platformImage   *ebiten.Image
+	backgroundColor = color.RGBA{200, 200, 255, 255}
 )
 
+// Special platform types
+const (
+	platformNormal = iota
+	platformMusicBox
+	platformConvenienceStore
+	platformRubiksCube
+	platformManhole
+)
+
+var platformColors = map[int]color.Color{
+	platformNormal:           color.RGBA{100, 100, 100, 255}, // Grey
+	platformMusicBox:         color.RGBA{255, 105, 180, 255}, // Pink
+	platformConvenienceStore: color.RGBA{0, 255, 0, 255},   // Green
+	platformRubiksCube:       color.RGBA{255, 255, 0, 255}, // Yellow
+	platformManhole:          color.RGBA{139, 69, 19, 255},  // Brown
+}
+
+var platformScores = map[int]int{
+	platformMusicBox:         30,
+	platformConvenienceStore: 15,
+	platformRubiksCube:       10,
+	platformManhole:          5,
+}
+
 func init() {
-	// Decode images
-	img, _, err := image.Decode(bytes.NewReader(Enemy_png))
+	// Using Player_png for the player character
+	img, _, err := image.Decode(bytes.NewReader(Player_png))
 	if err != nil {
 		log.Fatal(err)
 	}
 	playerImage = ebiten.NewImageFromImage(img)
 
-	img, _, err = image.Decode(bytes.NewReader(Bullet_png))
-	if err != nil {
-		log.Fatal(err)
-	}
-	bulletImage = ebiten.NewImageFromImage(img)
-
-	img, _, err = image.Decode(bytes.NewReader(Player_png))
-	if err != nil {
-		log.Fatal(err)
-	}
-	enemyImage = ebiten.NewImageFromImage(img)
+	// Create a simple white image for platforms, we'll color it later
+	platformImage = ebiten.NewImage(platformWidth, platformHeight)
+	platformImage.Fill(color.White)
 }
 
 type Player struct {
-	x, y  float64
-	image *ebiten.Image
+	x, y    float64
+	vx, vy  float64
+	isJumping bool
+	charge  float64
 }
 
 func (p *Player) GetRect() image.Rectangle {
-	bounds := p.image.Bounds()
-	return image.Rect(int(p.x), int(p.y), int(p.x)+bounds.Dx(), int(p.y)+bounds.Dy())
+	return image.Rect(int(p.x), int(p.y), int(p.x)+playerWidth, int(p.y)+playerHeight)
 }
 
-type Bullet struct {
-	x, y  float64
-	image *ebiten.Image
+func (p *Player) Jump(charge float64) {
+    angle := math.Pi / 3 // 60 degrees for a higher jump
+    power := charge * jumpPowerMultiplier
+
+    p.vx = math.Cos(angle) * power
+    p.vy = math.Sin(angle) * power
+	p.isJumping = true
 }
 
-func (b *Bullet) GetRect() image.Rectangle {
-	bounds := b.image.Bounds()
-	return image.Rect(int(b.x), int(b.y), int(b.x)+bounds.Dx(), int(b.y)+bounds.Dy())
+type Platform struct {
+	x, y float64
+	kind int
 }
 
-type Enemy struct {
-	x, y  float64
-	image *ebiten.Image
-}
-
-func (e *Enemy) GetRect() image.Rectangle {
-	bounds := e.image.Bounds()
-	return image.Rect(int(e.x), int(e.y), int(e.x)+bounds.Dx(), int(e.y)+bounds.Dy())
+func (p *Platform) GetRect() image.Rectangle {
+	return image.Rect(int(p.x), int(p.y), int(p.x)+platformWidth, int(p.y)+platformHeight)
 }
 
 type Game struct {
-	player          *Player
-	bullets         []*Bullet
-	enemies         []*Enemy
-	enemySpawnTimer int
-	shootTimer      int
-	score           int
-	gameOver        bool
+	player         *Player
+	platforms      []*Platform
+	cameraY        float64
+	score          int
+	combo          int
+	gameOver       bool
+	isCharging     bool
 }
 
 func NewGame() *Game {
-	player := &Player{
-		x:     screenWidth / 2,
-		y:     screenHeight - 50,
-		image: playerImage,
-	}
-	return &Game{
-		player: player,
+	g := &Game{}
+	g.player = &Player{x: screenWidth/2 - playerWidth/2, y: screenHeight - platformHeight - playerHeight}
+	g.platforms = append(g.platforms, &Platform{x: screenWidth/2 - platformWidth/2, y: screenHeight - platformHeight, kind: platformNormal})
+	g.generatePlatforms()
+	return g
+}
+
+func (g *Game) generatePlatforms() {
+	for i := 0; i < 10; i++ {
+		lastPlatform := g.platforms[len(g.platforms)-1]
+		newX := rand.Float64()*(screenWidth-platformWidth)
+		newY := lastPlatform.y - float64(rand.Intn(100)+80) // Increase min distance
+		
+		kind := platformNormal
+		if rand.Float64() < 0.2 { // 20% chance for a special platform
+			kind = rand.Intn(len(platformScores)) + 1
+		}
+
+		g.platforms = append(g.platforms, &Platform{x: newX, y: newY, kind: kind})
 	}
 }
 
 func (g *Game) Update() error {
 	if g.gameOver {
-		if ebiten.IsKeyPressed(ebiten.KeyR) {
-			// Reset the game by creating a new one
+		if inpututil.IsKeyJustPressed(ebiten.KeyR) {
 			*g = *NewGame()
 		}
 		return nil
 	}
 
-	// Player movement
-	if ebiten.IsKeyPressed(ebiten.KeyLeft) {
-		g.player.x -= playerSpeed
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyRight) {
-		g.player.x += playerSpeed
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyUp) {
-		g.player.y -= playerSpeed
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyDown) {
-		g.player.y += playerSpeed
-	}
-
-	// Keep player on screen
-	if g.player.x < 0 {
-		g.player.x = 0
-	}
-	if g.player.x > screenWidth-float64(g.player.image.Bounds().Dx()) {
-		g.player.x = screenWidth - float64(g.player.image.Bounds().Dx())
-	}
-
-	// Decrement shoot timer
-	if g.shootTimer > 0 {
-		g.shootTimer--
-	}
-
-	// Player shooting
-	if ebiten.IsKeyPressed(ebiten.KeySpace) && g.shootTimer == 0 {
-		g.shootTimer = shootCooldown
-		bullet := &Bullet{
-			x:     g.player.x + float64(g.player.image.Bounds().Dx())/2 - float64(bulletImage.Bounds().Dx())/2,
-			y:     g.player.y,
-			image: bulletImage,
-		}
-		g.bullets = append(g.bullets, bullet)
-	}
-
-	// Update bullets
-	for i := len(g.bullets) - 1; i >= 0; i-- {
-		bullet := g.bullets[i]
-		bullet.y -= bulletSpeed
-		if bullet.y < 0 {
-			g.bullets = append(g.bullets[:i], g.bullets[i+1:]...)
+	// Handle input
+	if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
+		if !g.player.isJumping {
+			g.isCharging = true
 		}
 	}
 
-	// Spawn enemies
-	g.enemySpawnTimer++
-	if g.enemySpawnTimer > 120 {
-		g.enemySpawnTimer = 0
-		enemy := &Enemy{
-			x:     rand.Float64() * screenWidth,
-			y:     0,
-			image: enemyImage,
-		}
-		g.enemies = append(g.enemies, enemy)
-	}
-
-	// Update enemies
-	for i := len(g.enemies) - 1; i >= 0; i-- {
-		enemy := g.enemies[i]
-		enemy.y += enemySpeed
-		if enemy.y > screenHeight {
-			g.enemies = append(g.enemies[:i], g.enemies[i+1:]...)
+	if g.isCharging {
+		g.player.charge += chargeRate
+		if g.player.charge > maxCharge {
+			g.player.charge = maxCharge
 		}
 	}
 
-	// Collision detection
-	for i := len(g.enemies) - 1; i >= 0; i-- {
-		enemy := g.enemies[i]
-		enemyRect := enemy.GetRect()
-
-		// Check collision with player
-		if enemyRect.Overlaps(g.player.GetRect()) {
-			g.gameOver = true
-			return nil // Stop updates for this frame
+	if inpututil.IsMouseButtonJustReleased(ebiten.MouseButtonLeft) {
+		if g.isCharging {
+			g.isCharging = false
+			g.player.Jump(g.player.charge)
+			g.player.charge = 0
 		}
+	}
 
-		// Check collision with bullets
-		for j := len(g.bullets) - 1; j >= 0; j-- {
-			bullet := g.bullets[j]
-			if bullet.GetRect().Overlaps(enemyRect) {
-				g.enemies = append(g.enemies[:i], g.enemies[i+1:]...)
-				g.bullets = append(g.bullets[:j], g.bullets[j+1:]...)
-				g.score++
-				break
+	// Player physics
+	if g.player.isJumping {
+		g.player.vy += gravity
+		g.player.x += g.player.vx
+		g.player.y += g.player.vy
+
+		// Wall bouncing
+		if g.player.x < 0 || g.player.x > screenWidth-playerWidth {
+			g.player.vx *= -1
+		}
+	}
+
+	// Check for landing
+	if g.player.vy > 0 {
+		for _, p := range g.platforms {
+			playerRect := g.player.GetRect()
+			platformRect := p.GetRect()
+
+            // AABB collision check
+			if playerRect.Max.X > platformRect.Min.X &&
+               playerRect.Min.X < platformRect.Max.X &&
+               playerRect.Max.Y > platformRect.Min.Y &&
+               playerRect.Min.Y < platformRect.Max.Y {
+
+                // Check if player was above the platform in the previous frame
+                if (g.player.y + playerHeight) - g.player.vy <= p.y {
+                    g.player.isJumping = false
+                    g.player.vy = 0
+                    g.player.vx = 0
+                    g.player.y = p.y - playerHeight
+                    
+                    g.handleScoring(p)
+
+                    // Generate new platforms if needed
+                    if p == g.platforms[len(g.platforms)-5] {
+                        g.generatePlatforms()
+                    }
+                    break
+                }
 			}
 		}
 	}
 
+	// Game over condition
+	if g.player.y > g.cameraY+screenHeight {
+		g.gameOver = true
+	}
+
+	// Camera follow
+	targetCameraY := g.player.y - screenHeight*2/3
+	g.cameraY += (targetCameraY - g.cameraY) * 0.05
+
 	return nil
 }
 
+func (g *Game) handleScoring(p *Platform) {
+	platformCenter := p.x + platformWidth/2
+	playerCenter := g.player.x + playerWidth/2
+	dist := math.Abs(platformCenter - playerCenter)
+
+	if dist < platformWidth/4 { // Landed near the center
+		g.combo++
+		g.score += g.combo * 2
+	} else {
+		g.combo = 1 // Reset combo to 1 for a normal hit
+		g.score++
+	}
+
+	if score, ok := platformScores[p.kind]; ok {
+		g.score += score
+	}
+}
+
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(color.RGBA{0x80, 0xa0, 0xc0, 0xff})
+	screen.Fill(backgroundColor)
+
+	// Draw platforms
+	for _, p := range g.platforms {
+		platformOp := &ebiten.DrawImageOptions{}
+		platformOp.GeoM.Translate(p.x, p.y-g.cameraY)
+		platformOp.ColorM.ScaleWithColor(platformColors[p.kind])
+		screen.DrawImage(platformImage, platformOp)
+	}
 
 	// Draw player
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(g.player.x, g.player.y)
-	screen.DrawImage(g.player.image, op)
+	playerOp := &ebiten.DrawImageOptions{}
+	playerOp.GeoM.Translate(g.player.x, g.player.y-g.cameraY)
+	screen.DrawImage(playerImage, playerOp)
 
-	// Draw bullets
-	for _, bullet := range g.bullets {
-		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Translate(bullet.x, bullet.y)
-		screen.DrawImage(bullet.image, op)
-	}
-
-	// Draw enemies
-	for _, enemy := range g.enemies {
-		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Translate(enemy.x, enemy.y)
-		screen.DrawImage(enemy.image, op)
-	}
-
-	// Draw score
+	// Draw UI
 	scoreStr := fmt.Sprintf("Score: %d", g.score)
-	text.Draw(screen, scoreStr, basicfont.Face7x13, 10, 20, color.White)
+	text.Draw(screen, scoreStr, basicfont.Face7x13, 10, 20, color.Black)
 
-	// Draw Game Over message
+	if g.isCharging {
+		chargeStr := fmt.Sprintf("Power: %.1f", g.player.charge)
+		text.Draw(screen, chargeStr, basicfont.Face7x13, 10, 40, color.Black)
+	}
+
 	if g.gameOver {
 		msg := "GAME OVER"
 		subMsg := "Press 'R' to Restart"
 		msgX := (screenWidth - len(msg)*7) / 2
 		subMsgX := (screenWidth - len(subMsg)*7) / 2
-		text.Draw(screen, msg, basicfont.Face7x13, msgX, screenHeight/2-20, color.White)
-		text.Draw(screen, subMsg, basicfont.Face7x13, subMsgX, screenHeight/2, color.White)
+		text.Draw(screen, msg, basicfont.Face7x13, msgX, screenHeight/2-20, color.Black)
+		text.Draw(screen, subMsg, basicfont.Face7x13, subMsgX, screenHeight/2, color.Black)
 	}
 }
 
@@ -249,10 +279,9 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	game := NewGame()
 	ebiten.SetWindowSize(screenWidth, screenHeight)
-	ebiten.SetWindowTitle("Plane Game")
-	if err := ebiten.RunGame(game); err != nil {
+	ebiten.SetWindowTitle("Jump Jump Game")
+	if err := ebiten.RunGame(NewGame()); err != nil {
 		log.Fatal(err)
 	}
 }
