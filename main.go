@@ -74,10 +74,11 @@ func init() {
 }
 
 type Player struct {
-	x, y    float64
-	vx, vy  float64
+	x, y      float64
+	vx, vy    float64
 	isJumping bool
-	charge  float64
+	charge    float64
+	direction float64
 }
 
 func (p *Player) GetRect() image.Rectangle {
@@ -85,11 +86,11 @@ func (p *Player) GetRect() image.Rectangle {
 }
 
 func (p *Player) Jump(charge float64) {
-    angle := math.Pi / 3 // 60 degrees for a higher jump
-    power := charge * jumpPowerMultiplier
+	angle := math.Pi / 3 // 60 degrees for a higher jump
+	power := charge * jumpPowerMultiplier
 
-    p.vx = math.Cos(angle) * power
-    p.vy = math.Sin(angle) * power
+	p.vx = math.Cos(angle) * power * p.direction
+	p.vy = math.Sin(angle) * power
 	p.isJumping = true
 }
 
@@ -114,7 +115,7 @@ type Game struct {
 
 func NewGame() *Game {
 	g := &Game{}
-	g.player = &Player{x: screenWidth/2 - playerWidth/2, y: screenHeight - platformHeight - playerHeight}
+	g.player = &Player{x: screenWidth/2 - playerWidth/2, y: screenHeight - platformHeight - playerHeight, direction: 1}
 	g.platforms = append(g.platforms, &Platform{x: screenWidth/2 - platformWidth/2, y: screenHeight - platformHeight, kind: platformNormal})
 	g.generatePlatforms()
 	return g
@@ -174,6 +175,7 @@ func (g *Game) Update() error {
 		// Wall bouncing
 		if g.player.x < 0 || g.player.x > screenWidth-playerWidth {
 			g.player.vx *= -1
+			g.player.direction *= -1
 		}
 	}
 
@@ -251,6 +253,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// Draw player
 	playerOp := &ebiten.DrawImageOptions{}
+	if g.player.direction == -1 {
+		playerOp.GeoM.Scale(-1, 1)
+		playerOp.GeoM.Translate(playerWidth, 0)
+	}
 	playerOp.GeoM.Translate(g.player.x, g.player.y-g.cameraY)
 	screen.DrawImage(playerImage, playerOp)
 
