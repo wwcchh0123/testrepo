@@ -152,6 +152,36 @@ go test ./testfile
   - 连击和计分系统
   - 物理引擎集成
 
+## 支持项目 (Support This Project)
+
+如果这个项目对您有帮助，请考虑给予支持！您的支持是我们持续改进和开发的动力。
+
+If this project has been helpful to you, please consider supporting it! Your support motivates us to keep improving and developing.
+
+### 🌟 如何支持 (How to Support)
+
+- **⭐ 给项目点星**: 在 GitHub 上为项目点 Star，让更多人发现这个项目
+- **🐛 报告问题**: 发现 Bug 或有改进建议？请创建 Issue
+- **💻 贡献代码**: 欢迎提交 Pull Request，一起完善项目
+- **📢 分享推广**: 将项目分享给朋友和社区，扩大影响力
+- **📝 完善文档**: 帮助我们改进文档和教程
+
+### 💝 特别感谢 (Special Thanks)
+
+感谢所有为项目贡献代码、提出建议、报告问题的开发者们！正是有了你们的参与，这个项目才能不断进步。
+
+Thanks to all the developers who have contributed code, suggestions, and bug reports! It is your participation that makes this project continuously improve.
+
+### 🤝 加入我们 (Join Us)
+
+- 关注项目获取最新动态
+- 加入讨论，分享您的想法和建议  
+- 成为贡献者，让项目变得更好
+
+Follow the project for updates, join discussions, share your ideas, and become a contributor to make this project even better!
+
 ---
 
 **享受游戏时光！🎉**
+
+**Have fun gaming! 🎉**
