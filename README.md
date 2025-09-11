@@ -21,7 +21,7 @@ This is an engaging physics-based jumping game where players control a character
 
 ### Special Platform Types
 
-- **Music Box Platform** (Pink): +30 points
+- **Music Box Platform** (Pink): +40 points
 - **Convenience Store Platform** (Green): +15 points  
 - **Rubik's Cube Platform** (Yellow): +10 points
 - **Manhole Platform** (Brown): +5 points
@@ -29,7 +29,7 @@ This is an engaging physics-based jumping game where players control a character
 ### Scoring System
 
 - Basic jump: +1 point
-- Center landing (combo zone): Bonus points multiplied by combo count
+- Center landing (combo zone): +50 points
 - Special platforms: Additional points based on platform type
 
 ### System Requirements
@@ -170,7 +170,7 @@ If you have questions or suggestions, please contact us through GitHub Issues.
 
 ### 特殊平台类型
 
-- **音乐盒平台** (粉色): +30 分
+- **音乐盒平台** (粉色): +40 分
 - **便利店平台** (绿色): +15 分
 - **魔方平台** (黄色): +10 分
 - **井盖平台** (棕色): +5 分
@@ -178,7 +178,7 @@ If you have questions or suggestions, please contact us through GitHub Issues.
 ### 评分系统
 
 - 基础跳跃: +1 分
-- 中心落地 (连击区域): 奖励分数根据连击次数递增
+- 中心落地 (连击区域): +50 分
 - 特殊平台: 根据平台类型获得额外分数
 
 ### 系统要求
