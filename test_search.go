@@ -45,4 +45,10 @@ func main() {
 	target4 := 1
 	result4 := SearchTargetStandalone(nums4, target4)
 	fmt.Printf("Test 4 - nums: %v, target: %d, result: %d, expected: -1\n", nums4, target4, result4)
+	
+	// Test case 5: single element - not found
+	nums5 := []int{3}
+	target5 := 7
+	result5 := SearchTargetStandalone(nums5, target5)
+	fmt.Printf("Test 5 - nums: %v, target: %d, result: %d, expected: -1\n", nums5, target5, result5)
 }
