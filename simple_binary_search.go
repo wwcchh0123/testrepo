@@ -30,7 +30,7 @@ func main() {
 	fmt.Printf("Test 1: nums = %v, target = %d, result = %d (expected 4)\n", nums1, target1, result1)
 	
 	// Test Case 2
-	nums2 := []int{-1, 0, 3, 5, 9, 12}
+	nums2 := []int{-1, 0, 3, 5, 9, 13}
 	target2 := 2
 	result2 := binarySearch(nums2, target2)
 	fmt.Printf("Test 2: nums = %v, target = %d, result = %d (expected -1)\n", nums2, target2, result2)
