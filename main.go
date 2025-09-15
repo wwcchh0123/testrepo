@@ -284,6 +284,9 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 }
 
 func main() {
+	// Test binary search algorithm
+	testBinarySearch()
+	
 	rand.Seed(time.Now().UnixNano())
 	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("Jump Jump Game")
