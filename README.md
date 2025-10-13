@@ -23,7 +23,7 @@ This is an engaging physics-based jumping game where players control a character
 
 - **Music Box Platform** (Pink): +50 points
 - **Convenience Store Platform** (Green): +15 points  
-- **Rubik's Cube Platform** (Yellow): +10 points
+- **Rubik's Cube Platform** (Yellow): +20 points
 - **Manhole Platform** (Brown): +10 points
 
 ### Scoring System
@@ -172,7 +172,7 @@ If you have questions or suggestions, please contact us through GitHub Issues.
 
 - **音乐盒平台** (粉色): +50 分
 - **便利店平台** (绿色): +15 分
-- **魔方平台** (黄色): +10 分
+- **魔方平台** (黄色): +20 分
 - **井盖平台** (棕色): +10 分
 
 ### 评分系统
