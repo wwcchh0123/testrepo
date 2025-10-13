@@ -29,7 +29,7 @@ This is an engaging physics-based jumping game where players control a character
 ### Scoring System
 
 - Basic jump: +1 point
-- Center landing (combo zone): +50 points
+- Center landing (combo zone): +60 points
 - Special platforms: Additional points based on platform type
 
 ### System Requirements
@@ -178,7 +178,7 @@ If you have questions or suggestions, please contact us through GitHub Issues.
 ### 评分系统
 
 - 基础跳跃: +1 分
-- 中心落地 (连击区域): +50 分
+- 中心落地 (连击区域): +60 分
 - 特殊平台: 根据平台类型获得额外分数
 
 ### 系统要求
