@@ -34,6 +34,9 @@ var (
 	playerImage     *ebiten.Image
 	platformImage   *ebiten.Image
 	backgroundColor = color.RGBA{200, 200, 255, 255}
+    // Reusable base images to avoid per-frame allocations
+    powerUpBaseImage  *ebiten.Image
+    particleBaseImage *ebiten.Image
 )
 
 // Special platform types
@@ -86,6 +89,12 @@ func init() {
 	// Create a simple white image for platforms, we'll color it later
 	platformImage = ebiten.NewImage(platformWidth, platformHeight)
 	platformImage.Fill(color.White)
+
+    // Create reusable white images for power-ups and particles (colored via ColorM)
+    powerUpBaseImage = ebiten.NewImage(20, 20)
+    powerUpBaseImage.Fill(color.White)
+    particleBaseImage = ebiten.NewImage(4, 4)
+    particleBaseImage.Fill(color.White)
 }
 
 type Player struct {
@@ -154,6 +163,8 @@ type Game struct {
 	isCharging      bool
 	particles       []*Particle
 	difficultyLevel int
+    // Track whether the current charge started while airborne (for extra jump)
+    chargeStartedAirborne bool
 }
 
 func NewGame() *Game {
@@ -227,10 +238,13 @@ func (g *Game) Update() error {
 	touchPressed := len(touches) > 0 && inpututil.IsTouchJustPressed(touches[0])
 	touchReleased := len(inpututil.AppendJustReleasedTouchIDs(nil)) > 0
 
-	// Start charging on mouse/touch press
-	if (mousePressed || touchPressed) && !g.player.isJumping {
-		g.isCharging = true
-	}
+    // Start charging on mouse/touch press (allow in-air if extra jump available)
+    if (mousePressed || touchPressed) && !g.isCharging {
+        if !g.player.isJumping || (g.player.isJumping && g.player.extraJumps > 0) {
+            g.isCharging = true
+            g.chargeStartedAirborne = g.player.isJumping
+        }
+    }
 
 	// Continue charging while held
 	if g.isCharging {
@@ -240,8 +254,8 @@ func (g *Game) Update() error {
 		}
 	}
 
-	// Release jump on mouse/touch release
-	if (mouseReleased || touchReleased) && g.isCharging {
+    // Release jump on mouse/touch release
+    if (mouseReleased || touchReleased) && g.isCharging {
 		g.isCharging = false
 
 		// Apply speed boost power-up to jump
@@ -251,6 +265,11 @@ func (g *Game) Update() error {
 		}
 
 		g.player.Jump(jumpPower)
+        // Consume an extra jump if this charge started while airborne
+        if g.chargeStartedAirborne && g.player.extraJumps > 0 {
+            g.player.extraJumps--
+        }
+        g.chargeStartedAirborne = false
 		g.player.charge = 0
 	}
 
@@ -313,6 +332,11 @@ func (g *Game) Update() error {
 					g.handleScoring(p)
 					g.createParticles(g.player.x+playerWidth/2, g.player.y+playerHeight, color.RGBA{255, 255, 255, 255})
 
+                    // If the extra jump power-up is active, refresh the available extra jump on landing
+                    if timer, ok := g.player.powerUpTimers[powerUpExtraJump]; ok && timer > 0 {
+                        g.player.extraJumps = 1
+                    }
+
 					// Generate new platforms if needed
 					if p == g.platforms[len(g.platforms)-5] {
 						g.generatePlatforms()
@@ -357,10 +381,10 @@ func (g *Game) handleScoring(p *Platform) {
 		baseScore += score
 	}
 
-	// Apply double score power-up
-	if g.player.doubleScore > 0 {
-		baseScore *= 2
-	}
+    // Apply double score power-up only when active (>1), scale by configured multiplier
+    if g.player.doubleScore > 1.0 {
+        baseScore = int(float64(baseScore) * g.player.doubleScore)
+    }
 
 	g.score += baseScore
 
@@ -381,27 +405,25 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		screen.DrawImage(platformImage, platformOp)
 	}
 
-	// Draw power-ups
-	for _, powerUp := range g.powerUps {
-		if !powerUp.collected && powerUp.y > g.cameraY-50 && powerUp.y < g.cameraY+screenHeight+50 {
-			powerUpImg := ebiten.NewImage(20, 20)
-			powerUpImg.Fill(powerUpColors[powerUp.kind])
-			powerUpOp := &ebiten.DrawImageOptions{}
-			powerUpOp.GeoM.Translate(powerUp.x, powerUp.y-g.cameraY)
-			screen.DrawImage(powerUpImg, powerUpOp)
-		}
-	}
+    // Draw power-ups (reuse base image, color via ColorM to avoid per-frame allocations)
+    for _, powerUp := range g.powerUps {
+        if !powerUp.collected && powerUp.y > g.cameraY-50 && powerUp.y < g.cameraY+screenHeight+50 {
+            powerUpOp := &ebiten.DrawImageOptions{}
+            powerUpOp.ColorM.ScaleWithColor(powerUpColors[powerUp.kind])
+            powerUpOp.GeoM.Translate(powerUp.x, powerUp.y-g.cameraY)
+            screen.DrawImage(powerUpBaseImage, powerUpOp)
+        }
+    }
 
-	// Draw particles
-	for _, particle := range g.particles {
-		if particle.life > 0 {
-			particleImg := ebiten.NewImage(4, 4)
-			particleImg.Fill(particle.color)
-			particleOp := &ebiten.DrawImageOptions{}
-			particleOp.GeoM.Translate(particle.x, particle.y-g.cameraY)
-			screen.DrawImage(particleImg, particleOp)
-		}
-	}
+    // Draw particles (reuse base image, color via ColorM)
+    for _, particle := range g.particles {
+        if particle.life > 0 {
+            particleOp := &ebiten.DrawImageOptions{}
+            particleOp.ColorM.ScaleWithColor(particle.color)
+            particleOp.GeoM.Translate(particle.x, particle.y-g.cameraY)
+            screen.DrawImage(particleBaseImage, particleOp)
+        }
+    }
 
 	// Draw player
 	playerOp := &ebiten.DrawImageOptions{}
