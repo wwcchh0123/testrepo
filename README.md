@@ -1,1 +1,259 @@
-IyBKdW1wIEp1bXAgR2FtZQoK5LiA5Liq5L2/55SoIEdvIOivreiogOWSjCBFYml0ZW4g5ri45oiP5byV5pOO5byA5Y+R55qE6Lez6LeD5bmz5Y+w5ri45oiP77yM57G75Ly85LqOIui3s+S4gOi3syLnmoTnjqnms5XjgIIKCiMjIOa4uOaIj+S7i+e7jQoK6L+Z5piv5LiA5Liq5YWF5ruh5oyR5oiY5oCn55qE6Lez6LeD5ri45oiP77yM546p5a626ZyA6KaB5o6n5Yi26KeS6Imy5Zyo5ZCE56eN5bmz5Y+w6Ze06Lez6LeD77yM6I635Y+W5bC95Y+v6IO96auY55qE5YiG5pWw44CC5ri45oiP5YW35pyJ54mp55CG5byV5pOO44CB6L+e5Ye757O757uf5ZKM54m55q6K5bmz5Y+w562J5Liw5a+M546p5rOV44CCCgojIyDnibnmgKcKCi0g8J+OriAqKueJqeeQhuW8leaTjioqOiDnnJ/lrp7nmoTph43lipvlkozot7Pot4PniannkIbmqKHmi58KLSDwn46vICoq6JOE5Yqb6Lez6LeDKio6IOaMieS9j+m8oOagh+W3pumUruiThOWKm++8jOmHiuaUvuWQjui3s+i3gwotIPCfj4YgKirov57lh7vns7vnu58qKjog57K+5YeG6JC95Zyo5bmz5Y+w5Lit5b+D5Y+v6I635b6X6L+e5Ye75Yqg5YiGCi0g8J+MiCAqKueJueauiuW5s+WPsCoqOiDlpJrnp43popzoibLnmoTnibnmrorlubPlj7DvvIzmj5DkvpvkuI3lkIznmoTliIbmlbDlpZblirEKLSDwn46oICoq5Yqo55S75pWI5p6cKio6IOa1geeVheeahOinkuiJsuWKqOeUu+WSjOmVnOWktOi3n+majwotIPCfk7EgKirot6jlubPlj7AqKjog5pSv5oyB5aSa56eN5pON5L2c57O757ufCgojIyDmuLjmiI/njqnms5UKCiMjIyDmk43kvZzmlrnlvI8KLSAqKum8oOagh+W3pumUrioqOiDmjInkvY/ok4TlipvvvIzmnb7lvIDot7Pot4MKLSAqKlLplK4qKjog5ri45oiP57uT5p2f5ZCO6YeN5paw5byA5aeLCgojIyMg5bmz5Y+w57G75Z6LCi0gKirngbDoibLlubPlj7AqKjog5pmu6YCa5bmz5Y+w77yM5o+Q5L6b5Z+656GA5YiG5pWwCi0gKirnsonoibLlubPlj7AqKiAo6Z+z5LmQ55uSKTogKzMwIOWIhgotICoq57u/6Imy5bmz5Y+wKiogKOS+v+WIqeW6lyk6ICsxNSDliIYgIAotICoq6buE6Imy5bmz5Y+wKiogKOmtlOaWuSk6ICsxMCDliIYKLSAqKuajleiJsuW5s+WPsCoqICjkupXnm5YpOiArNSDliIYKCiMjIyDor4TliIbns7vnu58KLSDln7rnoYDot7Pot4M6ICsxIOWIhgotIOeyvuWHhuiQveWcsCAo5bmz5Y+w5Lit5b+DKTog6L+e5Ye75YCN5pWw6YCS5aKeCi0g54m55q6K5bmz5Y+wOiDpop3lpJblpZblirHliIbmlbAKCiMjIOWuieijheimgeaxggoKLSBHbyAxLjIzLjMg5oiW5pu06auY54mI5pysCi0g5pSv5oyBIE9wZW5HTCAyLjEg5oiW5pu06auY54mI5pys55qE5Zu+5b2i5Y2hCgojIyDlv6vpgJ/lvIDlp4sKCiMjIyDlhYvpmobpobnnm64KYGBgYmFzaApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL3d3Y2NoaDAxMjMvdGVzdHJlcG8uZ2l0CmNkIHRlc3RyZXBvCmBgYAoKIyMjIOWuieijheS+nei1lgpgYGBiYXNoCmdvIG1vZCBkb3dubG9hZApgYGAKCiMjIyDov5DooYzmuLjmiI8KYGBgYmFzaApnbyBydW4gLgpgYGAKCiMjIOmhueebrue7k+aehAoKYGBgCi4K4pSc4pSA4pSAIG1haW4uZ28gICAgICAgICAgICMg5Li75ri45oiP6YC76L6RCuKUnOKUgOKUgCBlbWJlZC5nbyAgICAgICAgICAjIOa4uOaIj+i1hOa6kOW1jOWFpQrilJzilIDilIAgZ28ubW9kICAgICAgICAgICAjIEdvIOaooeWdl+S+nei1lgrilJzilIDilIAgZ28uc3VtICAgICAgICAgICAjIOS+nei1luagoemqjOaWh+S7tgrilJzilIDilIAgaW1hZ2VzLyAgICAgICAgICAjIOa4uOaIj+WbvueJh+i1hOa6kArilIIgICDilJzilIDilIAgcGxheWVyLnBuZyAgICMg546p5a626KeS6Imy5Zu+54mHCuKUgiAgIOKUnOKUgOKUgCBidWxsZXQucG5nICAgIyDlrZDlvLnlm77niYcgKOmihOeVmSkK4pSCICAg4pSU4pSA4pSAIGVuZW15LnBuZyAgICAjIOaVjOS6uuWbvueJhyAo6aKE55WZKQrilJTilIDilIAgdGVzdGZpbGUvICAgICAgICAjIOa1i+ivleaWh+S7tgogICAg4pSU4pSA4pSAIHRlc3QuZ28KYGBgCgojIyDmioDmnK/lrp7njrAKCiMjIyDkvb/nlKjnmoTmioDmnK/moIgKLSAqKkdvKio6IOS4u+imgee8lueoi+ivreiogAotICoqRWJpdGVuKio6IDJEIOa4uOaIj+W8leaTjgotICoqZ286ZW1iZWQqKjog6Z2Z5oCB6LWE5rqQ5bWM5YWlCi0gKipnb2xhbmcub3JnL3gvaW1hZ2UqKjog5Zu+5YOP5aSE55CGCgojIyMg5qC45b+D5Yqf6IO95qih5Z2XCi0gKipQbGF5ZXIqKjog546p5a626KeS6Imy5o6n5Yi25ZKM54mp55CG54q25oCBCi0gKipQbGF0Zm9ybSoqOiDlubPlj7Dns7vnu5/lkoznorDmkp7mo4DmtYsKLSAqKkdhbWUqKjog5ri45oiP54q25oCB566h55CG5ZKM5Li75b6q546vCi0gKipQaHlzaWNzKio6IOmHjeWKm+OAgei3s+i3g+WSjOeisOaSnueJqeeQhuW8leaTjgoKIyMg5byA5Y+R5LiO5p6E5bu6CgojIyMg5byA5Y+R546v5aKD6K6+572uCmBgYGJhc2gKIyDnoa7kv50gR28g54mI5pysCmdvIHZlcnNpb24KCiMg5a6J6KOF5L6d6LWWCmdvIG1vZCB0aWR5CgojIOi/kOihjOW8gOWPkeeJiOacrApnbyBydW4gLgpgYGAKCiMjIyDmnoTlu7rlj5HluIPniYjmnKwKYGBgYmFzaAojIOaehOW7uuW9k+WJjeW5s+WPsApnbyBidWlsZCAtbyBqdW1wLWdhbWUKCiMg5Lqk5Y+J57yW6K+RIFdpbmRvd3MKR09PUz13aW5kb3dzIEdPQVJDSD1hbWQ2NCBnbyBidWlsZCAtbyBqdW1wLWdhbWUuZXhlCgojIOS6pOWPiee8luivkSBtYWNPUwpHT09TPWRhcndpbiBHT0FSQ0g9YW1kNjQgZ28gYnVpbGQgLW8ganVtcC1nYW1lLW1hYwpgYGAKCiMjIyDmnoTlu7ogV2ViIOeJiOacrCAo5a6e6aqM5oCnKQpgYGBiYXNoCiMg6ZyA6KaB5a6J6KOFIEViaXRlbiDnmoQgV2ViIOaUr+aMgQpHT09TPWpzIEdPQVJDSD13YXNtIGdvIGJ1aWxkIC1vIGdhbWUud2FzbQpgYGAKCiMjIOa4uOaIj+aIquWbvgoK5ri45oiP5YyF5ZCr57K+576O55qE5YOP57Sg6aOO5qC85Zu+5b2i5ZKM5rWB55WF55qE5Yqo55S75pWI5p6c44CC6KeS6Imy5Lya5qC55o2u56e75Yqo5pa55ZCR6Ieq5Yqo57+76L2s77yM5pGE5YOP5py65Lya5bmz5ruR6Lef6ZqP546p5a6244CCCgojIyDotKHnjK7mjIfljZcKCuasoui/jui0oeeMruS7o+egge+8geivt+mBteW+quS7peS4i+atpemqpO+8mgoKMS4gRm9yayDov5nkuKrku5PlupMKMi4g5Yib5bu65Yqf6IO95YiG5pSvIChgZ2l0IGNoZWNrb3V0IC1iIGZlYXR1cmUvYW1hemluZy1mZWF0dXJlYCkKMy4g5o+Q5Lqk5pu05pS5IChgZ2l0IGNvbW1pdCAtbSAnQWRkIHNvbWUgYW1hemluZyBmZWF0dXJlJ2ApCjQuIOaOqOmAgeWIsOWIhuaUryAoYGdpdCBwdXNoIG9yaWdpbiBmZWF0dXJlL2FtYXppbmctZmVhdHVyZWApCjUuIOWIm+W7uiBQdWxsIFJlcXVlc3QKCiMjIOiuuOWPr+ivgQoK5pys6aG555uu5Z+65LqOIE1JVCDorrjlj6/or4HlvIDmupDjgILor6bop4EgW0xJQ0VOU0VdKExJQ0VOU0UpIOaWh+S7tuOAggoKIyMg6Ie06LCiCgotIFtFYml0ZW5dKGh0dHBzOi8vZWJpdGVuLm9yZy8pIC0g5LyY56eA55qEIEdvIDJEIOa4uOaIj+W8leaTjgotIFtHbyDlm6LpmJ9dKGh0dHBzOi8vZ29sYW5nLm9yZy8pIC0g5by65aSn55qE57yW56iL6K+t6KiACgojIyDogZTns7vmlrnlvI8KCuWmguaciemXrumimOaIluW7uuiuru+8jOivt+mAmui/hyBHaXRIdWIgSXNzdWVzIOiBlOezu+aIkeS7rOOAggoKLS0tCgoqKuS6q+WPl+a4uOaIj++8gSoqIPCfjq4=
+# Jump Jump Game - 增强版
+
+一个使用 Go 语言和 Ebiten 游戏引擎开发的增强版跳跃平台游戏，具有道具系统、粒子效果和动态难度调整等高级功能。
+
+## 🎮 游戏介绍
+
+这是一个充满挑战性的跳跃游戏，玩家需要控制角色在各种平台间跳跃，收集道具，获取尽可能高的分数。游戏具有完整的物理引擎、连击系统、道具系统和视觉特效。
+
+## ✨ 核心特性
+
+### 🎯 游戏机制
+- **蓄力跳跃系统**: 长按鼠标/触摸蓄力，释放后跳跃
+- **智能物理引擎**: 真实的重力模拟和墙壁反弹
+- **连击系统**: 精准落地可获得连击加分
+- **难度递进**: 随着分数增加自动调整游戏难度
+
+### 🏆 平台系统
+- **普通平台** (灰色): 基础跳跃点
+- **音乐盒平台** (粉色): +30 分
+- **便利店平台** (绿色): +15 分
+- **魔方平台** (黄色): +10 分
+- **井盖平台** (棕色): +5 分
+
+### 🎁 道具系统
+- **🚀 速度提升**: 1.5倍跳跃力，持续10秒
+- **💰 双倍得分**: 2倍分数奖励，持续15秒
+- **⬆️ 额外跳跃**: 获得额外跳跃机会，持续20秒
+- **⏰ 慢动作**: 0.5倍时间流速，持续8秒
+
+### 🎨 视觉效果
+- **粒子系统**: 着陆和收集道具时的粒子特效
+- **流畅动画**: 角色翻转和摄像机跟随
+- **实时UI**: 显示当前分数、最高分和激活的道具
+
+## 🕹️ 操作指南
+
+### 基础操作
+- **鼠标左键/触摸**: 长按蓄力，松开跳跃
+- **R键**: 游戏结束后重新开始
+
+### 高级技巧
+- **精准着陆**: 落在平台中心可获得连击加分
+- **道具收集**: 主动收集道具以获得战略优势
+- **墙壁反弹**: 利用墙壁反弹到达更远的平台
+
+## 🏗️ 技术架构
+
+### 核心模块
+```go
+type Player struct {
+    // 位置和物理状态
+    x, y, vx, vy float64
+    
+    // 道具效果
+    speedBoost    float64
+    doubleScore   float64
+    extraJumps    int
+    slowMotion    float64
+    powerUpTimers map[int]float64
+}
+
+type Game struct {
+    player          *Player
+    platforms       []*Platform
+    powerUps        []*PowerUp
+    particles       []*Particle
+    difficultyLevel int
+}
+```
+
+### 技术栈
+- **Go 1.23.3+**: 主要编程语言
+- **Ebiten 2.8.8**: 2D 游戏引擎框架
+- **go:embed**: 静态资源嵌入技术
+- **golang.org/x/image**: 图像处理库
+
+## 🚀 快速开始
+
+### 环境要求
+- Go 1.23.3 或更高版本
+- 支持 OpenGL 2.1+ 的图形卡
+- Windows/macOS/Linux 操作系统
+
+### 安装运行
+```bash
+# 克隆项目
+git clone https://github.com/wwcchh0123/testrepo.git
+cd testrepo
+
+# 安装依赖
+go mod download
+
+# 运行游戏
+go run .
+```
+
+### 构建发布
+```bash
+# 本地构建
+go build -o jump-game
+
+# Windows 交叉编译
+GOOS=windows GOARCH=amd64 go build -o jump-game.exe
+
+# macOS 交叉编译  
+GOOS=darwin GOARCH=amd64 go build -o jump-game-mac
+
+# Web 版本 (实验性)
+GOOS=js GOARCH=wasm go build -o game.wasm
+```
+
+## 📁 项目结构
+
+```
+.
+├── main.go                 # 主游戏逻辑和状态管理
+├── embed.go               # 静态资源嵌入
+├── go.mod                 # Go 模块依赖配置
+├── go.sum                 # 依赖版本锁定
+├── images/                # 游戏图片资源
+│   ├── player.png         # 玩家角色精灵
+│   ├── bullet.png         # 预留素材
+│   └── enemy.png          # 预留素材
+├── testfile/              # 测试代码
+│   └── test.go
+└── .github/               # CI/CD 配置
+    └── workflows/
+        ├── ci.yml         # 持续集成
+        └── claude.yml     # AI 助手集成
+```
+
+## 🎯 游戏机制详解
+
+### 评分系统
+```
+基础得分 = 连击数 × 2 (精准着陆) 或 1 (普通着陆)
+特殊平台加分 = 平台类型分数
+道具加成 = 双倍得分时 × 2
+最终得分 = (基础得分 + 特殊平台加分) × 道具加成
+```
+
+### 难度系统
+- 每100分增加一个难度等级
+- 平台间距随难度增加 (最大+50像素)
+- 特殊平台出现率随难度提升 (最高40%)
+- 道具出现率随难度降低 (最低5%)
+
+### 物理引擎
+- 重力常数: 0.4
+- 最大蓄力: 15.0
+- 跳跃角度: 60° (π/3)
+- 跳跃力系数: -1.2
+
+## 🛠️ 开发指南
+
+### 本地开发
+```bash
+# 检查 Go 版本
+go version
+
+# 整理依赖
+go mod tidy
+
+# 实时开发 (配合热重载工具)
+go run .
+```
+
+### 代码架构
+- **单例模式**: Game 实例管理
+- **组件系统**: Player, Platform, PowerUp 独立模块
+- **事件驱动**: 输入处理和碰撞检测
+- **状态机**: 游戏状态管理
+
+## 🎨 自定义与扩展
+
+### 添加新道具
+```go
+const (
+    powerUpNewType = iota + 4
+)
+
+func (g *Game) applyPowerUp(powerType int) {
+    switch powerType {
+    case powerUpNewType:
+        // 自定义道具效果
+        g.player.customEffect = true
+        g.player.powerUpTimers[powerType] = 12.0
+    }
+}
+```
+
+### 添加新平台类型
+```go
+const (
+    platformCustom = iota + 5
+)
+
+var platformColors = map[int]color.Color{
+    platformCustom: color.RGBA{R, G, B, 255},
+}
+
+var platformScores = map[int]int{
+    platformCustom: customScore,
+}
+```
+
+## 🤝 贡献指南
+
+我们欢迎各种形式的贡献！
+
+### 贡献类型
+- 🐛 Bug 修复
+- ✨ 新功能开发
+- 📝 文档改进
+- 🎨 美术资源
+- 🧪 测试用例
+
+### 提交流程
+1. Fork 项目仓库
+2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
+3. 提交更改 (`git commit -m '添加了惊人的新功能'`)
+4. 推送分支 (`git push origin feature/amazing-feature`)
+5. 创建 Pull Request
+
+### 代码规范
+- 遵循 Go 官方代码风格
+- 添加必要的注释和文档
+- 确保所有测试通过
+- 提交信息使用中文描述
+
+## 📄 许可证
+
+本项目采用 MIT 许可证开源。详情请查看 [LICENSE](LICENSE) 文件。
+
+```
+MIT License - 允许商业使用、修改、分发和私人使用
+```
+
+## 🙏 致谢
+
+- **[Ebiten](https://ebiten.org/)** - 优秀的 Go 2D 游戏引擎
+- **[Go Team](https://golang.org/)** - 强大且优雅的编程语言
+- **开源社区** - 持续的支持和贡献
+
+## 📞 联系我们
+
+- 📧 **Issues**: [GitHub Issues](https://github.com/wwcchh0123/testrepo/issues)
+- 💬 **讨论**: [GitHub Discussions](https://github.com/wwcchh0123/testrepo/discussions)
+- 🐛 **Bug 报告**: 请使用 Issue 模板
+
+---
+
+**🎮 开始你的跳跃之旅吧！**
+
+> 💡 **小贴士**: 尝试在平台中心着陆以获得更高的连击分数！
+
+[![Go Version](https://img.shields.io/badge/Go-1.23.3+-blue.svg)](https://golang.org)
+[![Ebiten](https://img.shields.io/badge/Ebiten-2.8.8-green.svg)](https://ebiten.org)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
