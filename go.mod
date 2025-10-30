@@ -1,4 +1,4 @@
-module github.com/gemini-demo/snake
+module github.com/wwcchh0123/testrepo
 
 go 1.23.3
 
