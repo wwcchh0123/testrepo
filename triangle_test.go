@@ -54,6 +54,20 @@ func TestCalculateTriangleArea(t *testing.T) {
 			want:    0,
 			wantErr: true,
 		},
+		{
+			name:    "Base too large",
+			base:    1e101,
+			height:  5.0,
+			want:    0,
+			wantErr: true,
+		},
+		{
+			name:    "Height too large",
+			base:    10.0,
+			height:  1e101,
+			want:    0,
+			wantErr: true,
+		},
 	}
 
 	for _, tt := range tests {
