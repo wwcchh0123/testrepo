@@ -1,1 +1,185 @@
-IyBKdW1wIEp1bXAgR2FtZQoK5LiA5Liq5L2/55SoIEdvIOivreiogOWSjCBFYml0ZW4g5ri45oiP5byV5pOO5byA5Y+R55qE6Lez6LeD5bmz5Y+w5ri45oiP77yM57G75Ly85LqOIui3s+S4gOi3syLnmoTnjqnms5XjgIIKCiMjIOa4uOaIj+S7i+e7jQoK6L+Z5piv5LiA5Liq5YWF5ruh5oyR5oiY5oCn55qE6Lez6LeD5ri45oiP77yM546p5a626ZyA6KaB5o6n5Yi26KeS6Imy5Zyo5ZCE56eN5bmz5Y+w6Ze06Lez6LeD77yM6I635Y+W5bC95Y+v6IO96auY55qE5YiG5pWw44CC5ri45oiP5YW35pyJ54mp55CG5byV5pOO44CB6L+e5Ye757O757uf5ZKM54m55q6K5bmz5Y+w562J5Liw5a+M546p5rOV44CCCgojIyDnibnmgKcKCi0g8J+OriAqKueJqeeQhuW8leaTjioqOiDnnJ/lrp7nmoTph43lipvlkozot7Pot4PniannkIbmqKHmi58KLSDwn46vICoq6JOE5Yqb6Lez6LeDKio6IOaMieS9j+m8oOagh+W3pumUruiThOWKm++8jOmHiuaUvuWQjui3s+i3gwotIPCfj4YgKirov57lh7vns7vnu58qKjog57K+5YeG6JC95Zyo5bmz5Y+w5Lit5b+D5Y+v6I635b6X6L+e5Ye75Yqg5YiGCi0g8J+MiCAqKueJueauiuW5s+WPsCoqOiDlpJrnp43popzoibLnmoTnibnmrorlubPlj7DvvIzmj5DkvpvkuI3lkIznmoTliIbmlbDlpZblirEKLSDwn46oICoq5Yqo55S75pWI5p6cKio6IOa1geeVheeahOinkuiJsuWKqOeUu+WSjOmVnOWktOi3n+majwotIPCfk7EgKirot6jlubPlj7AqKjog5pSv5oyB5aSa56eN5pON5L2c57O757ufCgojIyDmuLjmiI/njqnms5UKCiMjIyDmk43kvZzmlrnlvI8KLSAqKum8oOagh+W3pumUrioqOiDmjInkvY/ok4TlipvvvIzmnb7lvIDot7Pot4MKLSAqKlLplK4qKjog5ri45oiP57uT5p2f5ZCO6YeN5paw5byA5aeLCgojIyMg5bmz5Y+w57G75Z6LCi0gKirngbDoibLlubPlj7AqKjog5pmu6YCa5bmz5Y+w77yM5o+Q5L6b5Z+656GA5YiG5pWwCi0gKirnsonoibLlubPlj7AqKiAo6Z+z5LmQ55uSKTogKzMwIOWIhgotICoq57u/6Imy5bmz5Y+wKiogKOS+v+WIqeW6lyk6ICsxNSDliIYgIAotICoq6buE6Imy5bmz5Y+wKiogKOmtlOaWuSk6ICsxMCDliIYKLSAqKuajleiJsuW5s+WPsCoqICjkupXnm5YpOiArNSDliIYKCiMjIyDor4TliIbns7vnu58KLSDln7rnoYDot7Pot4M6ICsxIOWIhgotIOeyvuWHhuiQveWcsCAo5bmz5Y+w5Lit5b+DKTog6L+e5Ye75YCN5pWw6YCS5aKeCi0g54m55q6K5bmz5Y+wOiDpop3lpJblpZblirHliIbmlbAKCiMjIOWuieijheimgeaxggoKLSBHbyAxLjIzLjMg5oiW5pu06auY54mI5pysCi0g5pSv5oyBIE9wZW5HTCAyLjEg5oiW5pu06auY54mI5pys55qE5Zu+5b2i5Y2hCgojIyDlv6vpgJ/lvIDlp4sKCiMjIyDlhYvpmobpobnnm64KYGBgYmFzaApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL3d3Y2NoaDAxMjMvdGVzdHJlcG8uZ2l0CmNkIHRlc3RyZXBvCmBgYAoKIyMjIOWuieijheS+nei1lgpgYGBiYXNoCmdvIG1vZCBkb3dubG9hZApgYGAKCiMjIyDov5DooYzmuLjmiI8KYGBgYmFzaApnbyBydW4gLgpgYGAKCiMjIOmhueebrue7k+aehAoKYGBgCi4K4pSc4pSA4pSAIG1haW4uZ28gICAgICAgICAgICMg5Li75ri45oiP6YC76L6RCuKUnOKUgOKUgCBlbWJlZC5nbyAgICAgICAgICAjIOa4uOaIj+i1hOa6kOW1jOWFpQrilJzilIDilIAgZ28ubW9kICAgICAgICAgICAjIEdvIOaooeWdl+S+nei1lgrilJzilIDilIAgZ28uc3VtICAgICAgICAgICAjIOS+nei1luagoemqjOaWh+S7tgrilJzilIDilIAgaW1hZ2VzLyAgICAgICAgICAjIOa4uOaIj+WbvueJh+i1hOa6kArilIIgICDilJzilIDilIAgcGxheWVyLnBuZyAgICMg546p5a626KeS6Imy5Zu+54mHCuKUgiAgIOKUnOKUgOKUgCBidWxsZXQucG5nICAgIyDlrZDlvLnlm77niYcgKOmihOeVmSkK4pSCICAg4pSU4pSA4pSAIGVuZW15LnBuZyAgICAjIOaVjOS6uuWbvueJhyAo6aKE55WZKQrilJTilIDilIAgdGVzdGZpbGUvICAgICAgICAjIOa1i+ivleaWh+S7tgogICAg4pSU4pSA4pSAIHRlc3QuZ28KYGBgCgojIyDmioDmnK/lrp7njrAKCiMjIyDkvb/nlKjnmoTmioDmnK/moIgKLSAqKkdvKio6IOS4u+imgee8lueoi+ivreiogAotICoqRWJpdGVuKio6IDJEIOa4uOaIj+W8leaTjgotICoqZ286ZW1iZWQqKjog6Z2Z5oCB6LWE5rqQ5bWM5YWlCi0gKipnb2xhbmcub3JnL3gvaW1hZ2UqKjog5Zu+5YOP5aSE55CGCgojIyMg5qC45b+D5Yqf6IO95qih5Z2XCi0gKipQbGF5ZXIqKjog546p5a626KeS6Imy5o6n5Yi25ZKM54mp55CG54q25oCBCi0gKipQbGF0Zm9ybSoqOiDlubPlj7Dns7vnu5/lkoznorDmkp7mo4DmtYsKLSAqKkdhbWUqKjog5ri45oiP54q25oCB566h55CG5ZKM5Li75b6q546vCi0gKipQaHlzaWNzKio6IOmHjeWKm+OAgei3s+i3g+WSjOeisOaSnueJqeeQhuW8leaTjgoKIyMg5byA5Y+R5LiO5p6E5bu6CgojIyMg5byA5Y+R546v5aKD6K6+572uCmBgYGJhc2gKIyDnoa7kv50gR28g54mI5pysCmdvIHZlcnNpb24KCiMg5a6J6KOF5L6d6LWWCmdvIG1vZCB0aWR5CgojIOi/kOihjOW8gOWPkeeJiOacrApnbyBydW4gLgpgYGAKCiMjIyDmnoTlu7rlj5HluIPniYjmnKwKYGBgYmFzaAojIOaehOW7uuW9k+WJjeW5s+WPsApnbyBidWlsZCAtbyBqdW1wLWdhbWUKCiMg5Lqk5Y+J57yW6K+RIFdpbmRvd3MKR09PUz13aW5kb3dzIEdPQVJDSD1hbWQ2NCBnbyBidWlsZCAtbyBqdW1wLWdhbWUuZXhlCgojIOS6pOWPiee8luivkSBtYWNPUwpHT09TPWRhcndpbiBHT0FSQ0g9YW1kNjQgZ28gYnVpbGQgLW8ganVtcC1nYW1lLW1hYwpgYGAKCiMjIyDmnoTlu7ogV2ViIOeJiOacrCAo5a6e6aqM5oCnKQpgYGBiYXNoCiMg6ZyA6KaB5a6J6KOFIEViaXRlbiDnmoQgV2ViIOaUr+aMgQpHT09TPWpzIEdPQVJDSD13YXNtIGdvIGJ1aWxkIC1vIGdhbWUud2FzbQpgYGAKCiMjIOa4uOaIj+aIquWbvgoK5ri45oiP5YyF5ZCr57K+576O55qE5YOP57Sg6aOO5qC85Zu+5b2i5ZKM5rWB55WF55qE5Yqo55S75pWI5p6c44CC6KeS6Imy5Lya5qC55o2u56e75Yqo5pa55ZCR6Ieq5Yqo57+76L2s77yM5pGE5YOP5py65Lya5bmz5ruR6Lef6ZqP546p5a6244CCCgojIyDotKHnjK7mjIfljZcKCuasoui/jui0oeeMruS7o+egge+8geivt+mBteW+quS7peS4i+atpemqpO+8mgoKMS4gRm9yayDov5nkuKrku5PlupMKMi4g5Yib5bu65Yqf6IO95YiG5pSvIChgZ2l0IGNoZWNrb3V0IC1iIGZlYXR1cmUvYW1hemluZy1mZWF0dXJlYCkKMy4g5o+Q5Lqk5pu05pS5IChgZ2l0IGNvbW1pdCAtbSAnQWRkIHNvbWUgYW1hemluZyBmZWF0dXJlJ2ApCjQuIOaOqOmAgeWIsOWIhuaUryAoYGdpdCBwdXNoIG9yaWdpbiBmZWF0dXJlL2FtYXppbmctZmVhdHVyZWApCjUuIOWIm+W7uiBQdWxsIFJlcXVlc3QKCiMjIOiuuOWPr+ivgQoK5pys6aG555uu5Z+65LqOIE1JVCDorrjlj6/or4HlvIDmupDjgILor6bop4EgW0xJQ0VOU0VdKExJQ0VOU0UpIOaWh+S7tuOAggoKIyMg6Ie06LCiCgotIFtFYml0ZW5dKGh0dHBzOi8vZWJpdGVuLm9yZy8pIC0g5LyY56eA55qEIEdvIDJEIOa4uOaIj+W8leaTjgotIFtHbyDlm6LpmJ9dKGh0dHBzOi8vZ29sYW5nLm9yZy8pIC0g5by65aSn55qE57yW56iL6K+t6KiACgojIyDogZTns7vmlrnlvI8KCuWmguaciemXrumimOaIluW7uuiuru+8jOivt+mAmui/hyBHaXRIdWIgSXNzdWVzIOiBlOezu+aIkeS7rOOAggoKLS0tCgoqKuS6q+WPl+a4uOaIj++8gSoqIPCfjq4=
+# Jump Jump Game - 跳一跳游戏
+
+一个使用 Go 语言和 Ebiten 游戏引擎开发的跳跃平台游戏，类似于"跳一跳"的玩法。
+
+[![Go Version](https://img.shields.io/badge/Go-1.23.3-blue.svg)](https://golang.org/)
+[![Ebiten](https://img.shields.io/badge/Ebiten-v2.8.8-green.svg)](https://ebiten.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+## 🎮 游戏介绍
+
+这是一个充满挑战性的跳跃游戏，玩家需要控制角色在各种平台间跳跃，获取尽可能高的分数。游戏具有物理引擎、连击系统和特殊平台等丰富功能。
+
+![游戏截图](images/player.png)
+
+## ✨ 特色功能
+
+- 🎮 **物理引擎驱动**：真实的重力和跳跃物理模拟
+- 🎯 **精确控制**：按住蓄力，松开跳跃
+- 🌟 **连击系统**：连续成功跳跃获得额外加分
+- 🎵 **特殊平台**：音乐盒、便利店、魔方、窨井盖等多种平台类型
+- 💨 **动态效果**：流畅的角色动画和跳跃轨迹
+- 📈 **难度递增**：游戏随着进度逐渐增加挑战性
+- 🎨 **视觉效果**：支持多种操作系统和高分辨率显示
+
+## 🕹️ 游戏玩法
+
+### 操作方式
+- **鼠标左键** 或 **R键**：按住蓄力，松开跳跃
+- **游戏重启**：游戏结束后重新开始
+
+### 平台类型
+- **普通平台**：基础跳跃平台，+1 分
+- **音乐盒平台** (音乐符号)：+30 分
+- **便利店平台** (便利店)：+15 分  
+- **魔方平台** (魔方)：+10 分
+- **窨井盖平台** (井盖)：+5 分
+
+### 评分系统
+- 基础跳跃：+1 分
+- 粘合跳跃 (平台中心)：连击倍数递增
+- 特殊平台：额外奖励分数
+
+## 🛠️ 技术架构
+
+### 使用的技术栈
+- **Go**: 主编程语言
+- **Ebiten**: 2D 游戏引擎，支持 OpenGL 2.1 或更高版本的图形卡
+- **go:embed**: 静态资源嵌入
+- **golang.org/x/image**: 图像处理库
+
+### 核心功能模块
+- **Player**: 玩家角色控制和物理状态管理
+- **Platform**: 平台类型和碰撞检测
+- **Game**: 游戏状态管理和主循环
+- **Physics**: 重力、跳跃和碰撞物理引擎
+
+## 📋 安装要求
+
+- Go 1.23.3 或更高版本
+- 支持 OpenGL 2.1 或更高版本的图形卡
+
+## 🚀 快速开始
+
+### 克隆项目
+```bash
+git clone https://github.com/wwcchh0123/testrepo.git
+cd testrepo
+```
+
+### 安装依赖
+```bash
+go mod download
+```
+
+### 运行游戏
+```bash
+go run .
+```
+
+## 📁 项目结构
+
+```
+.
+├── main.go            # 主游戏逻辑
+├── embed.go           # 游戏资源嵌入
+├── go.mod             # Go 模块依赖
+├── go.sum             # 依赖校验文件
+├── images/            # 游戏图片资源
+│   ├── player.png     # 玩家角色图片
+│   ├── bullet.png     # 子弹图片 (预留)
+│   └── enemy.png      # 敌人图片 (预留)
+├── testfile/          # 测试文件
+│   └── test.go
+├── .github/           # GitHub Actions 工作流
+│   └── workflows/
+│       ├── ci.yml     # 持续集成
+│       └── claude.yml # Claude 自动化
+└── README.md          # 项目文档
+```
+
+## 🔧 开发与构建
+
+### 开发环境设置
+```bash
+# 确保 Go 版本
+go version
+
+# 安装依赖
+go mod tidy
+
+# 运行开发版本
+go run .
+```
+
+### 构建发布版本
+```bash
+# 构建当前平台
+go build -o jump-game
+
+# 交叉编译 Windows
+GOOS=windows GOARCH=amd64 go build -o jump-game.exe
+
+# 交叉编译 macOS
+GOOS=darwin GOARCH=amd64 go build -o jump-game-mac
+```
+
+### 构建 Web 版本 (实验性)
+```bash
+# 需要安装 Ebiten 的 Web 支持
+GOOS=js GOARCH=wasm go build -o game.wasm
+```
+
+## 🖼️ 游戏截图
+
+游戏包含精美的像素风格图形和流畅的动画效果。角色会根据移动方向自动翻转，摄像机会平滑跟随玩家。
+
+## 🤝 贡献指南
+
+欢迎贡献代码！请遵循以下步骤：
+
+1. Fork 这个仓库
+2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
+3. 提交更改 (`git commit -m 'Add some amazing feature'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 创建 Pull Request
+
+### 开发规范
+- 遵循 Go 语言编码规范
+- 添加适当的注释和文档
+- 确保代码通过所有测试
+- 保持代码简洁和可读性
+
+## 📄 许可证
+
+本项目基于 MIT 许可证开源。详见 [LICENSE](LICENSE) 文件。
+
+## 🔗 相关链接
+
+- [Ebiten](https://ebiten.org/) - 优秀的 Go 2D 游戏引擎
+- [Go 官网](https://golang.org/) - 强大的编程语言
+- [项目 Issues](https://github.com/wwcchh0123/testrepo/issues) - 问题反馈和建议
+
+## 📧 联系方式
+
+如果遇到问题或想要建议，请通过 GitHub Issues 联系我们。
+
+---
+
+**享受游戏！** 🎮
+
+## 📝 更新日志
+
+### v1.0.0 (当前版本)
+- ✅ 基础跳跃游戏机制
+- ✅ 多种特殊平台类型
+- ✅ 物理引擎和碰撞检测
+- ✅ 评分系统和连击功能
+- ✅ 跨平台支持
+
+### 🔮 未来规划
+- 🔄 添加更多平台类型
+- 🎵 背景音乐和音效
+- 🏆 成就系统
+- 💾 最高分保存
+- 🌍 多语言支持
