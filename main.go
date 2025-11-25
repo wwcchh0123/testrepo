@@ -537,6 +537,9 @@ func (g *Game) saveHighScore() {
 }
 
 func main() {
+	// Test binary search algorithm
+	testBinarySearch()
+	
 	rand.Seed(time.Now().UnixNano())
 	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("Jump Jump Game - Enhanced")
